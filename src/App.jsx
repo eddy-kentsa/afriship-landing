@@ -129,7 +129,7 @@ const handleCalculerPrix = async () => {
               Calculer mon prix
             </button>
             <button className="btn ghost" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-              Être contacté
+              Recevoir les détails
             </button>
           </div>
         </div>
@@ -248,7 +248,7 @@ const handleCalculerPrix = async () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button className="btn primary" onClick={handleSubmitEmail} disabled={loadingEmail}>
-                {loadingEmail ? "Envoi..." : "Être contacté"}
+                {loadingEmail ? "Envoi..." : "Recevoir les détails d’envoi"}
               </button>
             </div>
 
@@ -256,6 +256,8 @@ const handleCalculerPrix = async () => {
             {emailOk && <div className="alert success">Merci ! On vous contactera dès que c’est prêt.</div>}
 
             <div className="note">Pas de spam. 1–2 emails maximum. Désinscription possible.</div>
+            <div className="note"> Test en cours – service bientôt ouvert</div>
+
           </div>
         </div>
       </section>
