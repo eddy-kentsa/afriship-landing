@@ -94,20 +94,47 @@ const handleCalculerPrix = async () => {
 
 
   // --- (Étape 3) on branchera la collecte email ici ensuite
-  const handleSubmitEmail = async () => {
-    setErreurEmail("");
-    setEmailOk(false);
+const handleSubmitEmail = async () => {
+  setErreurEmail("");
+  setEmailOk(false);
 
-    if (!email || !email.includes("@")) {
-      setErreurEmail("Veuillez entrer un email valide.");
-      return;
-    }
+  if (!email || !email.includes("@")) {
+    setErreurEmail("Email invalide.");
+    return;
+  }
 
+  try {
     setLoadingEmail(true);
-    await new Promise((r) => setTimeout(r, 400));
+
+    const res = await fetch("https://afriship-api.onrender.com/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        poids: poids ? Number(poids) : null,
+        typeColis: typeColis || null,
+        prix,
+      }),
+    });
+
+    if (!res.ok) throw new Error();
+
     setEmailOk(true);
+  } catch {
+    setErreurEmail("Erreur. Réessaie plus tard.");
+  } finally {
     setLoadingEmail(false);
-  };
+  }
+};
+
+
+
+
+
+
+
+
+
 
   return (
     <div className="page">
